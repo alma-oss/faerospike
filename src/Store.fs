@@ -17,7 +17,7 @@ module Store =
         client.Put(policy, key, value)
 
     let storeState log (client: AerospikeClient) (configuration: Configuration) (state: bool) (key: string) =
-        log (sprintf "Storing state %A" bool)
+        log (sprintf "Storing state %A" state)
         let key' =
             key
             |> createKey configuration

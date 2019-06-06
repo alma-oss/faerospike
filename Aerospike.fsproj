@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Types.fs" />
-    <Compile Include="Store.fs" />
+    <Compile Include="src/Types.fs" />
+    <Compile Include="src/Store.fs" />
   </ItemGroup>
 
   <ItemGroup>
