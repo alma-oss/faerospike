@@ -2,6 +2,10 @@
 
 <!-- There is always Unreleased section on the top. Subsections (Add, Changed, Fix, Removed) should be Add as needed. -->
 ## Unreleased
+- [**BC**] Change namespace to `Lmc.Aerospike`
+- Use .netcore 3.1
+- Update dependencies
+- Add `AssemblyInfo`
 
 ## 1.2.0 - 2019-06-26
 - Add lint

@@ -1,4 +1,4 @@
-namespace Aerospike
+namespace Lmc.Aerospike
 
 module Store =
     open Aerospike.Client
