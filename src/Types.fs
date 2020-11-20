@@ -1,4 +1,4 @@
-namespace Aerospike
+namespace Lmc.Aerospike
 
 type ConnectionConfiguration = {
     Host: string

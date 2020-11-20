@@ -2,12 +2,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
     <PackageId>Lmc.Aerospike</PackageId>
     <Version>1.2.0</Version>
     <RepositoryUrl>https://stash.int.lmc.cz/projects/ARCHI/repos/faerospike/browse</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="src/Types.fs" />
