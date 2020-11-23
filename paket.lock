@@ -1,4 +1,4 @@
-RESTRICTION: == netcoreapp3.1
+RESTRICTION: == net50
 NUGET
   remote: https://api.nuget.org/v3/index.json
     Aerospike.Client (3.9.12)
@@ -12,7 +12,7 @@ NUGET
       Microsoft.NETCore.Platforms (>= 1.1)
 GIT
   remote: ssh://git@bitbucket.lmc.cz:7999/archi/nuget-server.git
-     (bf8284e0c914e925d6165512d84bd3f0a16bc1bf)
+     (abf6405dd429b5ca4884e6ee2d898dc42334e5ba)
       path: /nuget/
 GROUP Build
 STORAGE: NONE
