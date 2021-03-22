@@ -5,6 +5,10 @@
 - [**BC**] Update dependencies
     - Aerospike.Client ~> 4.1 (which requires Aerospike.Server ^5.0)
 - [**BC**] Requires Qualified Access for Modules
+- Add more connect functions
+    - `Store.tryToConnect`
+    - `Store.tryToConnectWithReconnects`
+    - `Store.connectWithReconnects`
 
 ## 3.0.0 - 2020-11-23
 - Use .netcore 5.0
