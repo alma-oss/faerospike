@@ -1,5 +1,6 @@
 namespace Lmc.Aerospike
 
+[<RequireQualifiedAccess>]
 module Store =
     open Aerospike.Client
 

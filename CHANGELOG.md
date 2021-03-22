@@ -2,6 +2,9 @@
 
 <!-- There is always Unreleased section on the top. Subsections (Add, Changed, Fix, Removed) should be Add as needed. -->
 ## Unreleased
+- [**BC**] Update dependencies
+    - Aerospike.Client ~> 4.1 (which requires Aerospike.Server ^5.0)
+- [**BC**] Requires Qualified Access for Modules
 
 ## 3.0.0 - 2020-11-23
 - Use .netcore 5.0

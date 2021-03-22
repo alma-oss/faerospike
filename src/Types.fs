@@ -5,6 +5,7 @@ type ConnectionConfiguration = {
     Port: int
 }
 
+[<RequireQualifiedAccess>]
 module ConnectionConfiguration =
     let toString configuration =
         sprintf "%s:%i" configuration.Host configuration.Port
@@ -14,6 +15,7 @@ type Configuration = {
     SetName: string
 }
 
+[<RequireQualifiedAccess>]
 module Configuration =
     let toString configuration =
         sprintf "%s/%s" configuration.Namespace configuration.SetName
