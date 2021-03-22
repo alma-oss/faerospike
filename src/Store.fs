@@ -34,18 +34,42 @@ module Store =
     let private createKey configuration (keyValue: string) =
         Key(configuration.Namespace, configuration.SetName, keyValue)
 
-    let private put (client: AerospikeClient) key value =
+    let put (client: AerospikeClient) key value =
         let policy = WritePolicy()
         policy.recordExistsAction <- RecordExistsAction.UPDATE
         policy.expiration <- -1 // never expires - see https://www.aerospike.com/apidocs/csharp/html/F_Aerospike_Client_WritePolicy_expiration.htm
 
         client.Put(policy, key, value)
 
-    let storeState log (client: AerospikeClient) (configuration: Configuration) (state: bool) (key: string) =
-        log (sprintf "Storing state %A" state)
-        let key' =
-            key
-            |> createKey configuration
-        let value = [| Bin("has_ack", if state then 1 else 0) |]
+    let putAs<'Value> client configuration key name (value: 'Value) =
+        let key = key |> createKey configuration
+        let value = [| Bin(name, value) |]
 
-        put client key' value
+        put client key value
+
+    let findData (client: AerospikeClient) configuration key =
+        match client.Get(null, key |> createKey configuration) with
+        | null -> None
+        | data -> Some data
+
+    let findValueOf<'Value> client configuration name key =
+        key
+        |> findData client configuration
+        |> Option.bind (fun data ->
+            match data.GetValue(name) with
+            | :? 'Value as value -> Some value
+            | _ -> None
+        )
+
+    let findValueAsString client configuration name key =
+        key
+        |> findData client configuration
+        |> Option.map (fun data ->
+            data.GetValue(name).ToString()
+        )
+
+    let iter (client: AerospikeClient) configuration (f: Key -> Record -> unit) =
+        let policy = new ScanPolicy()
+        policy.includeBinData <- true
+
+        client.ScanAll(policy, configuration.Namespace, configuration.SetName, ScanCallback(f))

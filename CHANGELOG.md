@@ -9,6 +9,14 @@
     - `Store.tryToConnect`
     - `Store.tryToConnectWithReconnects`
     - `Store.connectWithReconnects`
+- [**BC**] Remove too specific function `stateStore`
+- Add more common functions to read/write
+    - `Store.put`
+    - `Store.putAs`
+    - `Store.findData`
+    - `Store.findValueOf`
+    - `Store.findValueAsString`
+    - `Store.iter`
 
 ## 3.0.0 - 2020-11-23
 - Use .netcore 5.0
