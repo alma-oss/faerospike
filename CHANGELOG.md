@@ -2,12 +2,12 @@
 
 <!-- There is always Unreleased section on the top. Subsections (Add, Changed, Fix, Removed) should be Add as needed. -->
 ## Unreleased
+- Use net6.0
 - [**BC**] Update dependencies
-    - Aerospike.Client ~> 4.1 (which requires Aerospike.Server ^5.0)
+    - Aerospike.Client ~> 4.2 (which requires Aerospike.Server ^5.0)
 - [**BC**] Requires Qualified Access for Modules
-- Add more connect functions
-    - `Store.tryToConnect`
-    - `Store.tryToConnectWithReconnects`
+- Add/Change connect functions
+    - `Store.connect`
     - `Store.connectWithReconnects`
 - [**BC**] Remove too specific function `stateStore`
 - Add more common functions to read/write
@@ -17,6 +17,15 @@
     - `Store.findValueOf`
     - `Store.findValueAsString`
     - `Store.iter`
+- [**BC**] Change type `ConnectionConfiguration`
+- Add type `NodeConnection`
+- Allow to connect the cluster
+    - [**BC**] Change `Store.connect` to require `ConnectionConfiguration`
+- [**BC**] Change `Store.tryToConnectWithReconnects` to use `async` instead of a thread
+- [**BC**] Use `ILoggerFactory` instead of a log function
+- [**BC**] Rename functions
+    - `Configuration.toString` -> `Configuration.value`
+    - `ConnectionConfiguration.toString` -> `ConnectionConfiguration.value`
 
 ## 3.0.0 - 2020-11-23
 - Use .netcore 5.0

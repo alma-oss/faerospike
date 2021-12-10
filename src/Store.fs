@@ -1,40 +1,59 @@
 namespace Lmc.Aerospike
 
+open Aerospike.Client
+
+type ConnectionError =
+    | ConnectionError of AerospikeException
+    | ConnectionNotEstabilished
+
+[<RequireQualifiedAccess>]
+module ConnectionError =
+    let format = function
+        | ConnectionError e -> sprintf "%A" e
+        | ConnectionNotEstabilished -> "Connection to aerospike could not be estabilished"
+
 [<RequireQualifiedAccess>]
 module Store =
-    open Aerospike.Client
+    open Microsoft.Extensions.Logging
+    open Lmc.ErrorHandling
 
-    let connect (configuration: ConnectionConfiguration) =
-        new AerospikeClient(configuration.Host, configuration.Port)
+    let private connectClient = function
+        | SingleNode node -> new AerospikeClient(node.Host, node.Port)
+        | Cluster nodes ->
+            let policy = ClientPolicy()
+            let hosts: Host array =
+                nodes
+                |> List.map (fun node -> Host(node.Host, node.Port))
+                |> List.toArray
 
-    let tryToConnect logAerospike configuration =
-        try
-            connect configuration |> Some
+            new AerospikeClient(policy, hosts)
+
+    let connect configuration =
+        try connectClient configuration |> Ok
         with
-        | :? AerospikeException as e ->
-            logAerospike <| sprintf "%A" e
-            None
+        | :? AerospikeException as e -> Error (ConnectionError e)
 
-    let rec tryToConnectWithReconnects logAerospike attempts configuration =
-        let attemptLeft = (attempts - 1)
-        logAerospike <| sprintf "Try to connect - attempt left: %i" attemptLeft
-        if attemptLeft <= 0 then
-            failwithf "Connection to aerospike could not be estabilished"
+    let rec connectWithReconnects (loggerFactory: ILoggerFactory) (availableAttempts: int) configuration = asyncResult {
+        let logger = loggerFactory.CreateLogger("Aerospike")
+        logger.LogInformation("Try to connect - attempt left: {availableAttempts}", availableAttempts)
 
-        match configuration |> tryToConnect logAerospike with
-        | Some aerospike -> aerospike
-        | None ->
-            logAerospike "Connection failed, waiting for 10s ..."
-            System.Threading.Thread.Sleep (10 * 1000)
-            tryToConnectWithReconnects logAerospike attemptLeft configuration
+        match configuration |> connect with
+        | Ok aerospike -> return aerospike
+        | Error e when availableAttempts <= 0 -> return! AsyncResult.ofError e
+        | Error e ->
+            logger.LogWarning("Connection failed with {error}", e)
 
-    let connectWithReconnects logAerospike configuration =
-        configuration |> tryToConnectWithReconnects logAerospike 10
+            let secondsToWait = 10
+            logger.LogInformation("Connection failed, waiting {waitSeconds}s for reconnect...", secondsToWait)
+            do! AsyncResult.sleep (secondsToWait * 1000)
+
+            return! connectWithReconnects loggerFactory (availableAttempts - 1) configuration
+    }
 
     let private createKey configuration (keyValue: string) =
         Key(configuration.Namespace, configuration.SetName, keyValue)
 
-    let put (client: AerospikeClient) key value =
+    let put (client: AerospikeClient) key (value: Bin) =
         let policy = WritePolicy()
         policy.recordExistsAction <- RecordExistsAction.UPDATE
         policy.expiration <- -1 // never expires - see https://www.aerospike.com/apidocs/csharp/html/F_Aerospike_Client_WritePolicy_expiration.htm
@@ -43,7 +62,7 @@ module Store =
 
     let putAs<'Value> client configuration key name (value: 'Value) =
         let key = key |> createKey configuration
-        let value = [| Bin(name, value) |]
+        let value = Bin(name, value)
 
         put client key value
 
@@ -69,7 +88,7 @@ module Store =
         )
 
     let iter (client: AerospikeClient) configuration (f: Key -> Record -> unit) =
-        let policy = new ScanPolicy()
+        let policy = ScanPolicy()
         policy.includeBinData <- true
 
         client.ScanAll(policy, configuration.Namespace, configuration.SetName, ScanCallback(f))

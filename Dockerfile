@@ -1,4 +1,4 @@
-FROM dcreg.service.consul/dev/development-dotnet-core-sdk-common:5.0
+FROM dcreg.service.consul/dev/development-dotnet-core-sdk-common:6.0
 
 # build scripts
 COPY ./build.sh /library/
@@ -16,7 +16,7 @@ COPY ./.git /library/.git
 COPY ./.config /library/.config
 COPY ./CHANGELOG.md /library/
 
-WORKDIR /lib
+WORKDIR /library
 
 RUN \
     ./build.sh -t Build no-clean
