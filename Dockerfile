@@ -1,20 +1,20 @@
 FROM dcreg.service.consul/dev/development-dotnet-core-sdk-common:5.0
 
 # build scripts
-COPY ./build.sh /lib/
-COPY ./build.fsx /lib/
-COPY ./paket.dependencies /lib/
-COPY ./paket.references /lib/
-COPY ./paket.lock /lib/
+COPY ./build.sh /library/
+COPY ./build.fsx /library/
+COPY ./paket.dependencies /library/
+COPY ./paket.references /library/
+COPY ./paket.lock /library/
 
 # sources
-COPY ./Aerospike.fsproj /lib/
-COPY ./src /lib/src
+COPY ./Aerospike.fsproj /library/
+COPY ./src /library/src
 
 # others
-COPY ./.git /lib/.git
-COPY ./.config /lib/.config
-COPY ./CHANGELOG.md /lib/
+COPY ./.git /library/.git
+COPY ./.config /library/.config
+COPY ./CHANGELOG.md /library/
 
 WORKDIR /lib
 
