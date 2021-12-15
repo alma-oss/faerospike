@@ -26,6 +26,7 @@
 - [**BC**] Rename functions
     - `Configuration.toString` -> `Configuration.value`
     - `ConnectionConfiguration.toString` -> `ConnectionConfiguration.value`
+- Add logging
 
 ## 3.0.0 - 2020-11-23
 - Use .netcore 5.0

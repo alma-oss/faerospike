@@ -28,7 +28,41 @@ module Store =
 
             new AerospikeClient(policy, hosts)
 
-    let connect configuration =
+    [<RequireQualifiedAccess>]
+    module internal Logging =
+        let private asLogLevelToLogLevel = function
+            | Log.Level.DEBUG -> LogLevel.Debug
+            | Log.Level.ERROR -> LogLevel.Error
+            | Log.Level.WARN -> LogLevel.Warning
+            | Log.Level.INFO -> LogLevel.Information
+            | _ -> LogLevel.None
+
+        let private logLevelToAsLogLevel = function
+            | LogLevel.Debug | LogLevel.Trace -> Some Log.Level.DEBUG
+            | LogLevel.Error | LogLevel.Critical -> Some Log.Level.ERROR
+            | LogLevel.Warning -> Some Log.Level.WARN
+            | LogLevel.Information -> Some Log.Level.INFO
+            | _ -> None
+
+        let setUp (loggerFactory: ILoggerFactory) =
+            let logger = loggerFactory.CreateLogger("Aerospike")
+            Log.SetCallback(fun level message -> logger.Log(level |> asLogLevelToLogLevel, message))
+
+            [
+                LogLevel.Trace
+                LogLevel.Debug
+                LogLevel.Information
+                LogLevel.Warning
+                LogLevel.Error
+                LogLevel.Critical
+                LogLevel.None
+            ]
+            |> List.tryPick logLevelToAsLogLevel
+            |> Option.iter Log.SetLevel
+
+    let connect (loggerFactory: ILoggerFactory) configuration =
+        loggerFactory |> Logging.setUp
+
         try connectClient configuration |> Ok
         with
         | :? AerospikeException as e -> Error (ConnectionError e)
@@ -37,7 +71,7 @@ module Store =
         let logger = loggerFactory.CreateLogger("Aerospike")
         logger.LogInformation("Try to connect - attempt left: {availableAttempts}", availableAttempts)
 
-        match configuration |> connect with
+        match configuration |> connect loggerFactory with
         | Ok aerospike -> return aerospike
         | Error e when availableAttempts <= 0 -> return! AsyncResult.ofError e
         | Error e ->
@@ -57,6 +91,8 @@ module Store =
         let policy = WritePolicy()
         policy.recordExistsAction <- RecordExistsAction.UPDATE
         policy.expiration <- -1 // never expires - see https://www.aerospike.com/apidocs/csharp/html/F_Aerospike_Client_WritePolicy_expiration.htm
+        policy.replica <- Replica.RANDOM
+        policy.commitLevel <- CommitLevel.COMMIT_ALL
 
         client.Put(policy, key, value)
 
