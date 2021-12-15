@@ -1,2 +1,4 @@
 FSharp.Core
+Microsoft.Extensions.Logging.Abstractions
 Aerospike.Client
+Lmc.ErrorHandling
