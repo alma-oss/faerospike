@@ -2,11 +2,11 @@ STORAGE: NONE
 RESTRICTION: == net6.0
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    Aerospike.Client (4.2.7)
+    Aerospike.Client (5.3)
       Iconic.Zlib.Netstandard (>= 1.0)
       NeoLua (1.3.13)
       NETStandard.Library (>= 2.0)
-    FSharp.Core (6.0.1)
+    FSharp.Core (6.0.7)
     Iconic.Zlib.Netstandard (1.0)
       NETStandard.Library (>= 1.6)
     Microsoft.CSharp (4.7)
@@ -17,11 +17,11 @@ NUGET
     NETStandard.Library (2.0.3)
       Microsoft.NETCore.Platforms (>= 1.1)
   remote: paket-files/git_bitbucket.lmc.cz7999/archi/nuget-server/nuget
-    Lmc.ErrorHandling (6.0.0)
-      FSharp.Core (>= 6.0.1)
+    Lmc.ErrorHandling (6.1.0)
+      FSharp.Core (>= 6.0.3)
 GIT
   remote: ssh://git@bitbucket.lmc.cz:7999/archi/nuget-server.git
-     (3d9ee3aa45b84b573da9bf0a7af98d36debe3893)
+     (36856c5c96636c4d2dec3cf17d88ebe14362d56a)
       path: /nuget/
 GROUP Build
 STORAGE: NONE

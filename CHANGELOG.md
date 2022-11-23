@@ -2,6 +2,8 @@
 
 <!-- There is always Unreleased section on the top. Subsections (Add, Changed, Fix, Removed) should be Add as needed. -->
 ## Unreleased
+- Update dependencies
+    - [**BC**] Aerospike.Client ~> 5.3 (which requires Aerospike.Server ^6.0)
 
 ## 4.1.0 - 2022-01-04
 - Update dependencies
