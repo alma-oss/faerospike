@@ -17,8 +17,8 @@ NUGET
     NETStandard.Library (2.0.3)
       Microsoft.NETCore.Platforms (>= 1.1)
   remote: paket-files/git_bitbucket.lmc.cz7999/archi/nuget-server/nuget
-    Lmc.ErrorHandling (6.2.0)
-      FSharp.Core (>= 6.0.3)
+    Lmc.ErrorHandling (7.0.0)
+      FSharp.Core (>= 7.0.400 < 8.0)
 GIT
   remote: ssh://git@bitbucket.lmc.cz:7999/archi/nuget-server.git
      (70167b7494af7030b0ebfe20003944cc77761885)
