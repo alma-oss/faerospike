@@ -1,8 +1,8 @@
-FROM dcreg.service.consul/dev/development-dotnet-core-sdk-common:6.0
+FROM dcreg.service.consul/dev/development-dotnet-core-sdk-common:7.0
 
 # build scripts
 COPY ./build.sh /library/
-COPY ./build.fsx /library/
+COPY ./build /library/build
 COPY ./paket.dependencies /library/
 COPY ./paket.references /library/
 COPY ./paket.lock /library/
