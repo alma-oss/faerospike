@@ -1,4 +1,4 @@
-namespace Lmc.Aerospike
+namespace Alma.Aerospike
 
 open Aerospike.Client
 
@@ -15,7 +15,7 @@ module ConnectionError =
 [<RequireQualifiedAccess>]
 module Store =
     open Microsoft.Extensions.Logging
-    open Lmc.ErrorHandling
+    open Alma.ErrorHandling
 
     let private connectClient = function
         | SingleNode node -> new AerospikeClient(node.Host, node.Port)
