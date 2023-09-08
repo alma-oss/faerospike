@@ -1,4 +1,4 @@
-namespace Lmc.Aerospike
+namespace Alma.Aerospike
 
 type NodeConnection = {
     Host: string
