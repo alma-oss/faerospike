@@ -15,7 +15,7 @@ module ConnectionError =
 [<RequireQualifiedAccess>]
 module Store =
     open Microsoft.Extensions.Logging
-    open Alma.ErrorHandling
+    open Feather.ErrorHandling
 
     let private connectClient = function
         | SingleNode node -> new AerospikeClient(node.Host, node.Port)
