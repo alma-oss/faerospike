@@ -1,11 +1,11 @@
-framework: net9.0
+framework: net10.0
 storage: none
 
 source https://api.nuget.org/v3/index.json
-nuget FSharp.Core ~> 9.0
-nuget Microsoft.Extensions.Logging.Abstractions ~> 9.0
+nuget FSharp.Core ~> 10.0
+nuget Microsoft.Extensions.Logging.Abstractions ~> 10.0
 nuget Aerospike.Client ~> 6.0   # version ^7.0 initiated bug https://github.com/protocolbuffers/protobuf/issues/6740
-nuget Feather.ErrorHandling ~> 1.0
+nuget Feather.ErrorHandling ~> 2.0
 
 // [ FAKE GROUP ]
 group Build
