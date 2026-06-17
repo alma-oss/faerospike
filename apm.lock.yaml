@@ -1,0 +1,113 @@
+lockfile_version: '1'
+dependencies: []
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/skills/faerospike
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/faerospike/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:118157479283715e55ca41348f853545660daca561b657dd43a0e510ab616c24
+- kind: project-relative
+  target: claude
+  value: .claude/skills/faerospike/references/anti-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b88104c572b697ef8cb94272dbc0dda511d19c79838aeb4aa3ff597b644c8d61
+- kind: project-relative
+  target: claude
+  value: .claude/skills/faerospike/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:fc9f77df4177bb33ff7ea62ac423f0db288e3ea5e172de8f25089d42f21e2f3a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/faerospike/references/preferred-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:92c9e2ee7f0cf6d8b890fc4b7adfd5e2803cf6a86458017b4fbc840648a4abf2
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/faerospike
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/faerospike/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:118157479283715e55ca41348f853545660daca561b657dd43a0e510ab616c24
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/faerospike/references/anti-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b88104c572b697ef8cb94272dbc0dda511d19c79838aeb4aa3ff597b644c8d61
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/faerospike/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:fc9f77df4177bb33ff7ea62ac423f0db288e3ea5e172de8f25089d42f21e2f3a
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/faerospike/references/preferred-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:92c9e2ee7f0cf6d8b890fc4b7adfd5e2803cf6a86458017b4fbc840648a4abf2
+local_deployed_files:
+- .agents/skills/faerospike
+- .agents/skills/faerospike/SKILL.md
+- .agents/skills/faerospike/references/anti-patterns.md
+- .agents/skills/faerospike/references/examples.md
+- .agents/skills/faerospike/references/preferred-patterns.md
+- .claude/skills/faerospike
+- .claude/skills/faerospike/SKILL.md
+- .claude/skills/faerospike/references/anti-patterns.md
+- .claude/skills/faerospike/references/examples.md
+- .claude/skills/faerospike/references/preferred-patterns.md
+local_deployed_file_hashes:
+  .agents/skills/faerospike/SKILL.md: sha256:118157479283715e55ca41348f853545660daca561b657dd43a0e510ab616c24
+  .agents/skills/faerospike/references/anti-patterns.md: sha256:b88104c572b697ef8cb94272dbc0dda511d19c79838aeb4aa3ff597b644c8d61
+  .agents/skills/faerospike/references/examples.md: sha256:fc9f77df4177bb33ff7ea62ac423f0db288e3ea5e172de8f25089d42f21e2f3a
+  .agents/skills/faerospike/references/preferred-patterns.md: sha256:92c9e2ee7f0cf6d8b890fc4b7adfd5e2803cf6a86458017b4fbc840648a4abf2
+  .claude/skills/faerospike/SKILL.md: sha256:118157479283715e55ca41348f853545660daca561b657dd43a0e510ab616c24
+  .claude/skills/faerospike/references/anti-patterns.md: sha256:b88104c572b697ef8cb94272dbc0dda511d19c79838aeb4aa3ff597b644c8d61
+  .claude/skills/faerospike/references/examples.md: sha256:fc9f77df4177bb33ff7ea62ac423f0db288e3ea5e172de8f25089d42f21e2f3a
+  .claude/skills/faerospike/references/preferred-patterns.md: sha256:92c9e2ee7f0cf6d8b890fc4b7adfd5e2803cf6a86458017b4fbc840648a4abf2
