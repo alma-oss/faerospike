@@ -1,5 +1,7 @@
 # AGENTS.md — Alma.Aerospike
 
+This repo ships Agent Skill for the `Alma.Aerospike` library. Compatible agents discover it automatically; see `.agents/skills/faerospike/SKILL.md`.
+
 ## Project Purpose
 
 F# library providing a functional wrapper around the Aerospike .NET client for key-value store operations. Supports connecting to Aerospike clusters and storing/retrieving state data. Published as NuGet package `Alma.Aerospike`.
