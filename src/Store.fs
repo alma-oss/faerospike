@@ -21,7 +21,7 @@ module Store =
         | SingleNode node -> new AerospikeClient(node.Host, node.Port)
         | Cluster nodes ->
             let policy = ClientPolicy()
-            let hosts: Host array =
+            let hosts: Host[] =
                 nodes
                 |> List.map (fun node -> Host(node.Host, node.Port))
                 |> List.toArray
@@ -67,6 +67,7 @@ module Store =
         with
         | :? AerospikeException as e -> Error (ConnectionError e)
 
+    [<TailCall>]
     let rec connectWithReconnects (loggerFactory: ILoggerFactory) (availableAttempts: int) configuration = asyncResult {
         let logger = loggerFactory.CreateLogger("Aerospike")
         logger.LogInformation("Try to connect - attempt left: {availableAttempts}", availableAttempts)
